@@ -9,8 +9,8 @@ import { Op } from 'sequelize';
 // Configuração do S3
 const s3 = new S3Client({
   credentials: {
-    accessKeyId: 'AKIA3FLD4V4PREDLCT4J',
-    secretAccessKey: '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',
+    accessKeyId: 'exemple',
+    secretAccessKey: 'exemple',
   },
   region: 'us-east-1',
 });
