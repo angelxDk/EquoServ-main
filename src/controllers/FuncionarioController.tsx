@@ -6,8 +6,8 @@ import { S3Client, DeleteObjectCommand } from '@aws-sdk/client-s3';
 // Initialize S3 client with AWS SDK v3
 const s3 = new S3Client({
   credentials: {
-    accessKeyId: 'AKIA3FLD4V4PREDLCT4J',
-    secretAccessKey: '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',
+    accessKeyId: 'exemple',
+    secretAccessKey: 'exemple',
   },
   region: 'us-east-1',
 });
