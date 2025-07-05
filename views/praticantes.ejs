@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../views/assets/css/global.css">
+  <script src="https://kit.fontawesome.com/1750870fb4.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <script src="../views/scripts/logout.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap" rel="stylesheet">
+  <title>Participantes</title>
+</head>
+
+<body>
+  <header>
+    <div class="mb-3 logotitle">
+      <img src="/views/assets/imgs/logo.jpg" alt="logo" class="logo">
+      <h2 class="title">EQUOSIS</h2>
+    </div>
+    <nav>
+      <a href="/home" title="Pagina Inicial"><i class="fas fa-house"></i></a>
+      <a href="/praticantes">Praticantes</a>
+      <a href="/funcionarios" title="">Fisioterapeutas</a>
+      <a title="sair" id="btn" onclick="return confirmLogout()"><i class="fas fa-sign-out-alt"></i></a>
+    </nav>
+  </header>
+  <main>
+    <div class="container-table">
+      <div class="container-search">
+        <input type="text" class="search" placeholder="Pesquisar">
+        <button class="search-btn"><i class="fas fa-search"></i></button>
+      </div>
+      <div class="table-head">
+        <h2>Praticantes</h2>
+        <button class="cadastroModal editar-btn" title="cadastrar" onclick="return openCadastroModal()"><i
+            class="fas fa-plus"></i>
+        </button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Data de nascimento</th>
+            <th>Sexo</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="participantTableBody">
+          <% praticantes.forEach(praticante=> { %>
+            <tr>
+              <td>
+                <%= praticante.nome %>
+              </td>
+              <td>
+                <%= praticante.data_nascimento %>
+              </td>
+              <td>
+                <%= praticante.sexo %>
+              </td>
+              <td>
+                <button class="editar-btn" title="editar" data-id="<%= praticante.id %>" onclick="openEditModal()"><i
+                    class="fas fa-edit"></i></button>
+                <button class="editar-btn" title="info" data-id="<%= praticante.id %>" onclick="openInfoModal(event)"><i
+                    class="fas fa-info-circle"></i></button>
+                <button class="delete-btn" title="delete" data-id="<%= praticante.id %>" onclick="DeletePraticante()"><i
+                    class="fas fa-trash"></i></button>
+              </td>
+            </tr>
+            <% }); %>
+        </tbody>
+      </table>
+    </div>
+    <div id="modal" class="modal">
+      <form id="forminside" class="modal-box">
+        <h2 class="h2Modal">Confirmação</h2>
+        <br>
+        <p class="modalP">Deseja realmente sair?</p>
+        <div class="closeBtn">
+          <button id="cancelbtn" class="cancelbtn">Não</button>
+          <button id="logoutbtn" class="logoutbtn"> Sim</button>
+        </div>
+      </form>
+    </div>
+    <!-- Modal de Editar -->
+    <div id="editarModal" class="modal" style="display: none;">
+      <div class="modal-cad">
+        <h2>Editar Praticante Cadastrado</h2>
+        <form id="editar-form">
+          <div class="cad">
+            <div class="elemts">
+              <div>
+                <label for="nome">Nome do Praticante</label>
+                <input type="text" id="nomeEdit" name="nome" required>
+              </div>
+              <div>
+                <label for="data_nascimento">Data de Nascimento</label>
+                <input type="date" id="dataNascimentoEdit" name="data_nascimento" required>
+              </div>
+            </div>
+            <div class="elemts">
+              <div>
+                <label for="Idade">Idade</label>
+                <input type="text" id="idadeEdit" name="idade" required>
+              </div>
+              <div>
+                <label for="sexo">Sexo</label>
+                <select name="sexo" id="sexoEdit">
+                  <option value="Masculino">Masculino</option>
+                  <option value="Feminino">Feminino</option>
+                </select>
+              </div>
+            </div>
+            <div class="elemts">
+              <div>
+                <label for="naturalidade">Naturalidade</label>
+                <input type="text" id="NaturalidadeEdit" name="Naturalidade" required>
+              </div>
+              <div>
+                <label for="nacionalidade">Nacionalidade</label>
+                <input type="text" id="NacionalidadeEdit" name="Nacionalidade" required>
+              </div>
+            </div>
+            <div class="elemts">
+              <div>
+                <label for="Nome_escola">Nome da Escola</label>
+                <input type="text" id="NomeEscolaEdit" name="Nome_escola" required>
+              </div>
+              <div>
+                <label for="periodo">Em qual periodo estuda</label>
+                <select name="periodo" id="periodoEdit">
+                  <option value="Matutino">Matutino</option>
+                  <option value="Vespertino">Vespertino</option>
+                  <option value="Noturno">Noturno</option>
+                  <option value="Integral">Integral</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+        <button class="cancelbtn" onclick="closeModal()">Cancelar</button>
+        <button type="submit" onclick="return Editar()">Salvar</button>
+      </div>
+    </div>
+    <!-- Modal de Cadastro -->
+    <div id="cadastroModal" class="modal" style="display: none;">
+      <div class="modal-cad">
+        <h2>Cadastrar Novo Praticante</h2>
+        <form id="cadastro-form">
+          <div class="cad">
+            <div class="elemts">
+              <div>
+                <label for="nome">Nome do Praticante</label>
+                <input type="text" id="nomeCad" name="nome" required>
+              </div>
+              <div>
+                <label for="data_nascimento">Data de Nascimento</label>
+                <input type="date" id="dataNascimentoCad" name="data_nascimento" required>
+              </div>
+            </div>
+            <div class="elemts">
+              <div>
+                <label for="Idade">Idade</label>
+                <input type="text" id="idadeCad" name="idade" required>
+              </div>
+              <div>
+                <label for="sexo">Sexo</label>
+                <select name="sexo" id="sexoCad">
+                  <option value="Masculino">Masculino</option>
+                  <option value="Feminino">Feminino</option>
+                </select>
+              </div>
+            </div>
+            <div class="elemts">
+              <div>
+                <label for="naturalidade">Naturalidade</label>
+                <input type="text" id="NaturalidadeCad" name="Naturalidade" required>
+              </div>
+              <div>
+                <label for="nacionalidade">Nacionalidade</label>
+                <input type="text" id="NacionalidadeCad" name="Nacionalidade" required>
+              </div>
+            </div>
+            <div class="elemts">
+              <div>
+                <label for="Nome_escola">Nome da Escola</label>
+                <input type="text" id="NomeEscolaCad" name="Nome_escola" required>
+              </div>
+              <div>
+                <label for="periodo">Em qual periodo estuda</label>
+                <select name="periodo" id="periodoCad">
+                  <option value="Matutino">Matutino</option>
+                  <option value="Vespertino">Vespertino</option>
+                  <option value="Noturno">Noturno</option>
+                  <option value="Integral">Integral</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+        <button class="cancelbtn" onclick="closeModal()">Cancelar</button>
+        <button type="submit" onclick="Cadastrar()">Cadastrar</button>
+      </div>
+    </div>
+    <!-- modal de info -->
+    <div id="infoModal" class="modal" style="display: none;">
+      <div class="modal-cad">
+        <div class="closeInfoDetails">
+          <i class="fas fa-times-circle closeInfo" onclick="closeModal()"></i>
+        </div>
+        <h2>Informações Detalhadas</h2>
+        <form id="info-form">
+          <div class="cad">
+            <div class="elemts">
+              <div>
+                <label for="nome">Nome do Praticante</label>
+                <input type="text" id="nomeInfo" name="nome" readonly required>
+              </div>
+              <div>
+                <label for="data_nascimento">Data de Nascimento</label>
+                <input type="date" id="dataNascimentoInfo" name="data_nascimento" readonly required>
+              </div>
+            </div>
+            <div class="elemts">
+              <div>
+                <label for="Idade">Idade</label>
+                <input type="text" id="idadeInfo" name="idade" readonly required>
+              </div>
+              <div>
+                <label for="sexo">Sexo</label>
+                <select name="sexo" id="sexoInfo" disabled>
+                  <option value="Masculino">Masculino</option>
+                  <option value="Feminino">Feminino</option>
+                </select>
+              </div>
+            </div>
+            <div class="elemts">
+              <div>
+                <label for="naturalidade">Naturalidade</label>
+                <input type="text" id="NaturalidadeInfo" name="naturalidade" readonly required>
+              </div>
+              <div>
+                <label for="nacionalidade">Nacionalidade</label>
+                <input type="text" id="NacionalidadeInfo" name="nacionalidade" readonly required>
+              </div>
+            </div>
+            <div class="elemts">
+              <div>
+                <label for="nome_escola">Nome da Escola</label>
+                <input type="text" id="NomeEscolaInfo" name="nome_escola" readonly required>
+              </div>
+              <div>
+                <label for="periodo">Em qual periodo estuda</label>
+                <select name="periodo" id="periodoInfo" disabled>
+                  <option value="Matutino">Matutino</option>
+                  <option value="Vespertino">Vespertino</option>
+                  <option value="Noturno">Noturno</option>
+                  <option value="Integral">Integral</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script>
+    let currentPraticanteId = null;
+
+    function openInfoModal(event) {
+      const praticanteId = event.target.getAttribute('data-id');
+      if (!praticanteId) {
+        console.error('ID do praticante não encontrado');
+        return;
+      }
+      fetch(`/praticantes/${praticanteId}`)
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('nomeInfo').value = data.nome;
+          document.getElementById('dataNascimentoInfo').value = data.data_nascimento;
+          document.getElementById('idadeInfo').value = data.idade;
+          document.getElementById('NaturalidadeInfo').value = data.naturalidade;
+          document.getElementById('NacionalidadeInfo').value = data.nacionalidade;
+          document.getElementById('NomeEscolaInfo').value = data.nome_escola;
+          document.getElementById('periodoInfo').value = data.periodo;
+          document.getElementById('sexoInfo').value = data.sexo;
+        })
+        .catch(error => console.error('Erro ao obter dados do praticante:', error));
+      document.getElementById('infoModal').style.display = 'flex';
+    }
+    function confirmLogout() {
+      document.getElementById('modal').style.display = 'flex';
+      document.body.classList.add('modal-open');
+      return false;
+    }
+
+    document.getElementById('cancelbtn').addEventListener('click', function () {
+      document.getElementById('modal').style.display = 'none';
+      document.body.classList.remove('modal-open');
+    });
+
+    document.getElementById('logoutbtn').addEventListener('click', function () {
+      fetch('/logout', { method: 'POST' })
+        .then(response => {
+          if (response.ok) {
+            localStorage.removeItem('username');
+            window.location.href = '/';
+          } else {
+            console.error('Logout failed');
+          }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+    function DeletePraticante() {
+      const praticanteId = event.target.getAttribute('data-id');
+      if (!praticanteId) {
+        console.error('ID do praticante não encontrado');
+        return;
+      }
+      fetch(`/praticantes/${praticanteId}`, {
+        method: 'DELETE'
+      })
+        .then(response => {
+          if (response.ok) {
+            window.location.href = '/praticantes';
+          } else {
+            console.error('Erro ao deletar praticante');
+          }
+        })
+        .catch(error => console.error('Erro:', error));
+    }
+    function openModalDelete() {
+      document.getElementById('modal-delete').style.display = 'flex';
+    }
+    function openEditModal() {
+      const praticanteId = event.target.getAttribute('data-id');
+      currentPraticanteId = praticanteId;
+      if (!praticanteId) {
+        console.error('ID do praticante não encontrado');
+        return;
+      }
+      fetch(`/praticantes/${praticanteId}`)
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('nomeEdit').value = data.nome;
+          document.getElementById('dataNascimentoEdit').value = data.data_nascimento;
+          document.getElementById('idadeEdit').value = data.idade;
+          document.getElementById('NaturalidadeEdit').value = data.naturalidade;
+          document.getElementById('NacionalidadeEdit').value = data.nacionalidade;
+          document.getElementById('NomeEscolaEdit').value = data.nome_escola;
+          document.getElementById('periodoEdit').value = data.periodo;
+          document.getElementById('sexoEdit').value = data.sexo;
+        })
+        .catch(error => console.error('Erro ao obter dados do praticante:', error));
+      document.getElementById('editarModal').style.display = 'flex';
+    }
+    function openCadastroModal() {
+      document.getElementById('cadastroModal').style.display = 'flex';
+    }
+    function Editar() {
+      const form = document.getElementById('editar-form');
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+      fetch(`/praticantes/${currentPraticanteId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => {
+          if (response.ok) {
+            window.location.href = '/praticantes';
+            document.getElementById('editarModal').style.display = 'none';
+          } else {
+            console.error('Edição falhou');
+          }
+        })
+        .catch(error => console.error('Erro:', error));
+    }
+    function Cadastrar() {
+      const form = document.getElementById('cadastro-form');
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+
+      fetch('/praticantes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => {
+          if (response.ok) {
+            return response.json(); // Parse the response JSON
+          } else {
+            throw new Error('Erro ao cadastrar praticante');
+          }
+        })
+        .then(data => {
+          window.location.href = '/praticantes';
+          document.getElementById('cadastroModal').style.display = 'none';
+        })
+    }
+
+    function closeModal() {      const cadastroModal = document.getElementById('cadastroModal');
+      const editarModal = document.getElementById('editarModal');
+      const infoModal = document.getElementById('infoModal');
+
+      if (cadastroModal.style.display === 'flex') {
+        cadastroModal.style.display = 'none';
+      } else if (editarModal.style.display === 'flex') {
+        editarModal.style.display = 'none';
+      } else if (infoModal.style.display === 'flex') {
+        infoModal.style.display = 'none';
+      } else {
+        return;
+      }
+    }
+  </script>
+</body>
+
+</html>

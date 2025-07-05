@@ -1,0 +1,17 @@
+{
+  "include": ["src", "types/**/*", "src/server.tsx"],
+  "exclude": ["node_modules/**"],
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "lib": ["dom", "esnext"],
+    "rootDir": "./src",
+    "outDir": "./src/build",
+    "jsx": "react",
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "ts-node": {
+    "files": true
+  }
+}

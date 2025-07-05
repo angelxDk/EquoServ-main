@@ -1,0 +1,605 @@
+header {
+  background: radial-gradient(ellipse at bottom, #0d1d31 0%, #4b5178 100%);
+  padding: 1em;
+  color: aliceblue;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin: 0 1em;
+}
+
+.container-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.container-search input[type="text"] {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Adiciona uma borda semi-transparente */
+  backdrop-filter: blur(10px);
+  /* Cria o efeito de vidro */
+  -webkit-backdrop-filter: blur(10px);
+  /* Para compatibilidade com o Safari */
+  background: rgba(75, 81, 120, 0.7);
+  /* Adiciona um fundo semi-transparente */
+  color: #fff;
+  margin-right: 5px;
+  width: 50%;
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.container-search input[type="text"]:focus {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.container-search button {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background: #4b5178;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+
+.title {
+  position: absolute;
+  bottom: -0.5em;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: 900;
+  font-family: 'Cormorant Garamond', serif;
+  text-shadow: 0 0 10px wheat, 0 0 20px wheat, 0 0 30px wheat, 0 0 40px #0d1d31, 0 0 70px #0d1d31, 0 0 80px #0d1d31, 0 0 100px #0d1d31, 0 0 150px #0d1d31;
+}
+
+.logotitle {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  border-radius: 100px;
+  box-shadow: #4b5178 0px 0px 0px 7px, #0d1d31 0px 0px 0px 10px;
+}
+
+.header a {
+  color: wheat;
+  text-decoration: none;
+  margin-right: 1em;
+}
+
+#modal {
+  display: none;
+}
+
+
+.cancelbtn,
+.logoutbtn {
+  padding: 14px 20px;
+  width: 50%;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 550;
+}
+
+.cancelbtn {
+  background: #b8e4d3;
+}
+
+.logoutbtn {
+  background: rgb(207, 23, 23);
+  color: #fff;
+}
+
+.logoutbtn:hover {
+  background: rgb(9, 112, 55);
+}
+
+.closeBtn {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 350px) {
+
+  .closeBtn {
+    flex-direction: column;
+  }
+
+  .cancelbtn,
+  .logoutbtn {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+}
+
+.modal-box {
+  background-color: white;
+  /* Preto com opacidade média */
+  margin: 15% auto;
+  border: 1px solid #888;
+  max-width: 400px;
+  border-radius: 8px;
+  text-align: center;
+  padding: 0 30px;
+}
+
+.modal-box button {
+  background-color: #6e4c28;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 10px;
+  width: 50%;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 550;
+}
+
+.modal-box button:hover {
+  background-color: #805f3c;
+}
+
+.modal-box .cancelbtn {
+  background-color: #e4e3b8;
+  color: #805f3c;
+  margin-right: 10px;
+
+}
+
+.modal-box .cancelbtn:hover {
+  background-color: #e1dba6;
+}
+
+.modal-box .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.modal-box .close:hover,
+.modal-box .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-box {
+  background-color: white;
+  /* Branco e visível */
+  margin: 15% auto;
+  border: 1px solid #888;
+  max-width: 400px;
+  border-radius: 8px;
+  text-align: center;
+  padding: 0 30px;
+}
+.modal-cad {
+  background-color: white;
+  margin: 15% auto;
+  border: 1px solid #888;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  max-width: 800px;
+  border-radius: 8px;
+  text-align: center;
+  padding: 0 30px;
+}
+
+.modal-cad form {
+  display: flex;
+}
+.cad {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 10px;
+}
+.cad div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 10px;
+}
+.elemts div {
+  font-size: medium;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}	
+.elemts div input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin: 10px;
+}
+.elemts div select{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin: 10px;
+}
+.elemts div label {
+  margin: 5px;
+  font-weight: 600;
+  font-size: 12px;
+  color: #888;
+}
+.modal-cad input,
+.modal-cad select {
+  width: calc(50% - 10px);
+  margin-bottom: 10px;
+}
+
+.modal-cad input[type="text"],
+.modal-cad input[type="date"],
+.modal-cad input[type="email"],
+.modal-cad select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.modal-cad input[type="text"],
+.modal-cad input[type="date"] {
+  width: calc(100% - 10px);
+}
+
+.modal-cad select {
+  width: calc(50% - 10px);
+}
+
+@media (max-width: 768px) {
+  .modal-cad input,
+  .modal-cad select,
+  .modal-cad .cad label,
+  .modal-cad .cad input,
+  .modal-cad .cad select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-cad label,
+  .modal-cad input,
+  .modal-cad select,
+  .modal-cad .cad label,
+  .modal-cad .cad input,
+  .modal-cad .cad select {
+    width: 100%;
+  }
+}
+
+
+.modal-cad h2 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.modal-cad .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.modal-cad .close:hover,
+.modal-cad .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-cad button {
+  background-color: #291a48;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: white;
+  padding: 14px 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  width: 30%;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 550;
+}
+
+.modal-cad button:hover {
+  background-color: #3c3d80;
+}
+
+.modal-cad .cancelbtn {
+  background-color: #e4b8b8;
+  color: #ffffff;
+  margin-right: 10px;
+
+}
+
+.closeInfoDetails{
+  background-color: transparent;
+  color: red;
+  display: flex;
+  justify-content: end;
+  margin-top: 10px;
+  align-self: flex-end;
+  border: none;
+  outline: none;
+  font-size: larger;
+}
+.closeInfoDetails .closeInfo{
+  cursor: pointer;
+}
+.closeInfoDetails:hover {
+  background-color: transparent;
+  color: rgb(157, 52, 52);
+}
+
+header #btn{
+  cursor: pointer;
+}
+
+.modal-cad .closeInfo:hover {
+  background-color: transparent;
+  color: rgb(157, 52, 52);
+}
+
+.modal-cad .cancelbtn:hover {
+  background-color: #e1a6a6;
+}
+
+.input-group {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.input-group label,
+.input-group input {
+  flex: 1 0 20%;
+  /* O valor 20% pode ser ajustado de acordo com suas necessidades */
+  margin: 5px;
+}
+
+@media screen and (max-width: 600px) {
+  .modal-box {
+    width: 90%;
+    margin: 10% auto;
+  }
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: radial-gradient(ellipse at bottom, #0d1d31 0%, #4b5178 100%);
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+.container-table {
+  margin-top: 10px;
+  margin: 20px auto;
+  background: radial-gradient(ellipse at bottom, #0d1d31 0%, #4b5178 100%);
+  padding: 20px;
+  border-radius: 10px;
+  color: #fff;
+  /* White text color */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #3949ab;
+  /* Darker blue border color */
+}
+
+th {
+  background: radial-gradient(ellipse at bottom, #0d1d31 0%, #292d4b 100%);
+  color: #fff;
+  border-radius: 5px;
+}
+
+tr:hover {
+  background: radial-gradient(ellipse at bottom, #0d1d31 0%, #4b5178 100%);
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+
+  th,
+  td {
+    display: block;
+    width: 100%;
+  }
+}
+
+.editar-btn {
+  background-color: #4b5178;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.delete-btn {
+  background-color: #e43f3f;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.editar-btn:hover {
+  background-color: rgb(58, 95, 141);
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.7);
+  /* Preto com opacidade média */
+  backdrop-filter: blur(5px);
+  display: none;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.modalP {
+  color: black;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.h2Modal {
+  font-size: 25px;
+  font-weight: 900;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.modal-box .modal-body p {
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 20px;
+  font-weight: 200;
+  margin-left: 12px;
+}
+
+p {
+  color: #ffffff;
+  font-size: 1.2em;
+  line-height: 1.5em;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+a {
+  color: aliceblue;
+  margin: 0 1em;
+  text-decoration: none;
+  font-size: large;
+  font-style: oblique;
+}
+
+a:hover {
+  color: wheat;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+}
+
+li {
+  margin: 0 1em;
+}
+
+li a {
+  color: aliceblue;
+  text-decoration: none;
+}
+
+li a:hover {
+  color: wheat;
+}
+
+.hero {
+  background: radial-gradient(ellipse at bottom, #0d1d31 0%, #4b5178 100%);
+  color: aliceblue;
+  text-align: center;
+  border-radius: 20px;
+  padding: 2em 0;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 3em;
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .title {
+    font-size: 15px;
+  }
+
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .logotitle {
+    flex-direction: row;
+
+  }
+}
